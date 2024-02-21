@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+### Condicionales en los componentes de React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Durante la clase hemos aprendido a utilizar condicionales en los componentes de React, para mostrar u ocultar elementos según una condición. Recordar que para ocultar un elemento, podemos retornar `null` en lugar de un elemento JSX.
 
-## Available Scripts
+Remarcar que para poder utilizar condicionales dentro de JSX, es necesario utilizar expresiones de JavaScript, por lo que debemos encerrarlas entre llaves `{}` y en utilizar el operador ternario para definir la condición.
 
-In the project directory, you can run:
+```jsx
+function App() {
+  const user = {
+    name: 'Juan',
+    email: 'pepe@juan.com'
+  }
 
-### `npm start`
+  return (
+    <div>
+      {user ? (
+        <h1>Hola, {user.name}</h1>
+      ) : (
+        <h1>Hola, extraño</h1>
+      )}
+    </div>
+  )
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Estado avanzado useState
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+En la clase de hoy hemos aprendido a utilizar el hook `useState` para manejar el estado de un componente. Recordar que el estado es un objeto que contiene los datos que el componente necesita para funcionar y que al cambiar, provoca que el componente se vuelva a renderizar.
+Destacar que hemos visto la forma de actualizar el estado con el método `setState` que nos devuelve `useState` y que podemos utilizar para cambiar el estado de un componente, y este lo ejecutamos pasando un callback o un valor.
 
-### `npm test`
+- El valor sera un reemplazo del estado actual.
+- El callback nos permite obtener el estado actual y devolver un nuevo estado.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx
+import React, { useState } from 'react'
 
-### `npm run build`
+function App() {
+  const [count, setCount] = useState(0)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  return (
+    <div>
+      <p>Has hecho click {count} veces</p>
+      <button onClick={() => setCount(count + 1)}>
+        Haz click
+      </button>
+    </div>
+  )
+}
+```
+o 
+```jsx
+import React, { useState } from 'react'
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+function App() {
+  const [count, setCount] = useState(0)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  return (
+    <div>
+      <p>Has hecho click {count} veces</p>
+      <button onClick={() => setCount(prevCount => prevCount + 1)}>
+        Haz click
+      </button>
+    </div>
+  )
+}
+```
